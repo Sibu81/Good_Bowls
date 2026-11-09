@@ -1,0 +1,23 @@
+name: Good Bowls CI
+
+on:
+  push:
+    branches:
+      - devops-learning
+  pull_request:
+    branches:
+      - devops-learning
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build backend Docker image
+        run: docker build -t good-bowls-server:ci ./server
+
+      - name: Build frontend Docker image
+        run: docker build -t good-bowls-client:ci ./client
